@@ -186,7 +186,7 @@
 <div id="scroller">
 
   <div id="home" style="background:linear-gradient(135deg,#1a73e8,#0d47a1);color:white;padding:60px 30px;text-align:center;">
-    <h1>🌐 Networking Concepts Project</h1>
+    <h1>Networking Concepts Project</h1>
     <p style="margin-top:10px;color:#cce0ff;">CSC 4220 — Computer Networks | Semester Project</p>
     <p class="team-name" style="margin-top:8px;font-weight:bold;">Daniel</p>
     <div class="hero-btns" style="margin-top:24px;">
@@ -196,32 +196,28 @@
   </div>
 
   <div class="section" id="concepts">
-    <h2>📡 Networking Concepts</h2>
+    <h2>Networking Concepts</h2>
     <p style="margin-bottom:18px;font-size:.92rem;color:#444;">Here are the main networking topics I researched for this project.</p>
     <div class="cards">
       <div class="card">
-        <h3>🔍 DNS (Domain Name System)</h3>
+        <h3>DNS (Domain Name System)</h3>
         <p>DNS is like the internet's phonebook. It converts domain names like <code>github.com</code> into IP addresses that computers can use. The process goes: browser cache → OS cache → recursive resolver → root server → TLD server → authoritative server.</p>
       </div>
       <div class="card">
-        <h3>🏷️ IP Addressing</h3>
+        <h3>IP Addressing</h3>
         <p>IPv4 uses 32-bit addresses like <code>185.199.108.153</code> and supports about 4.3 billion addresses. IPv6 uses 128-bit addresses like <code>2606:50c0:8000::153</code> and has way more. GitHub Pages supports both (dual-stack).</p>
       </div>
       <div class="card">
-        <h3>🔒 HTTP vs HTTPS</h3>
+        <h3>HTTP vs HTTPS</h3>
         <p>HTTP (port 80) sends data in plain text so anyone can read it. HTTPS (port 443) uses TLS encryption to keep data private. Our site uses HTTPS so it's secure.</p>
       </div>
       <div class="card">
-        <h3>🛡️ Network Security</h3>
+        <h3>Network Security</h3>
         <p>Security features include TLS certificates, HSTS headers (forces HTTPS), DNSSEC (prevents fake DNS), and firewalls. GitHub Pages automatically gives you HTTPS with a valid certificate.</p>
       </div>
       <div class="card">
-        <h3>📦 HTTP Headers</h3>
+        <h3>HTTP Headers</h3>
         <p>Headers are extra info sent with each request/response. Examples: <code>Content-Type</code>, <code>Cache-Control</code>, <code>Strict-Transport-Security</code>. You can see them using <code>curl -I</code> in the terminal.</p>
-      </div>
-      <div class="card">
-        <h3>🌍 CDN &amp; Hosting</h3>
-        <p>GitHub Pages hosts your site on a CDN (Content Delivery Network). This means your files are stored on servers around the world so they load fast no matter where you are.</p>
       </div>
     </div>
   </div>
@@ -229,11 +225,11 @@
   <hr/>
 
   <div class="section" id="dns">
-    <h2>🔬 DNS &amp; IP — Terminal Output</h2>
-    <p style="margin-bottom:20px;font-size:.92rem;color:#444;">We ran these commands on our deployed site to show DNS resolution and IP addresses.</p>
+    <h2>DNS &amp; IP — Terminal Output</h2>
+    <p style="margin-bottom:20px;font-size:.92rem;color:#444;">I ran these commands on my deployed site to show DNS resolution and IP addresses.</p>
 
     <div class="terminal-wrap">
-      <p><strong>1. nslookup</strong> — shows what IP address our domain resolves to</p>
+      <p><strong>1. nslookup</strong> — shows what IP address resolves to</p>
       <div class="terminal">
         <div><span class="y">$ nslookup DanielsProjects1.github.io</span></div>
         <div>&nbsp;</div>
@@ -283,7 +279,7 @@
     </div>
 
     <div class="terminal-wrap">
-      <p><strong>4. curl -I</strong> — shows HTTP response headers from our site</p>
+      <p><strong>4. curl -I</strong> — shows HTTP response headers</p>
       <div class="terminal">
         <div><span class="y">$ curl -I https://DanielsProjects1.github.io</span></div>
         <div>&nbsp;</div>
@@ -352,7 +348,7 @@
     </div>
 
     <h3 style="margin-bottom:8px;font-size:1rem;">HTTP Status Codes</h3>
-    <p style="font-size:.88rem;color:#555;margin-bottom:8px;">These are some of the codes we saw when testing our site:</p>
+    <p style="font-size:.88rem;color:#555;margin-bottom:8px;">Here are some common HTTP status codes, some of which I encountered when testing my site (Mostly 404 haha):</p>
     <div class="status-grid">
       <div class="sc sc2">200 — OK</div>
       <div class="sc sc2">204 — No Content</div>
@@ -383,7 +379,7 @@
   <hr/>
 
   <div class="section" id="team">
-    <h2>👤 About Me</h2>
+    <h2>About Me</h2>
     <div class="team-grid" style="grid-template-columns: minmax(200px, 300px);">
       <div class="team-card">
         <div class="avatar">D</div>
@@ -395,7 +391,7 @@
   </div>
 
   <footer>
-    <p>Networking Project — CSC 4220 &nbsp;|&nbsp; Hosted on GitHub Pages &nbsp;|&nbsp; Daniel &nbsp;|&nbsp; © 2025</p>
+    <p>Networking Project — CSC 4220 &nbsp;|&nbsp; Hosted on GitHub Pages &nbsp;|&nbsp; Daniel Asilokun &nbsp;|&nbsp; © 2026</p>
   </footer>
 
 </div>
