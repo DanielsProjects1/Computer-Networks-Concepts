@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Networking Project</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f4f8;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background-color: #1a73e8;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    nav .logo {
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-right: 10px;
+    }
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+    }
+    nav button:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    #scroller {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    /* HOME */
+    #home {
+      background: linear-gradient(135deg, #1a73e8, #0d47a1);
+      color: white;
+      padding: 60px 30px;
+      text-align: center;
+    }
+    #home h1 { font-size: 2rem; margin-bottom: 10px; }
+    #home p { font-size: 1rem; margin-bottom: 8px; color: #cce0ff; }
+    #home .team-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 25px; }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 22px;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+    .btn-white { background: white; color: #1a73e8; }
+    .btn-white:hover { background: #e8f0fe; }
+    .btn-outline { background: transparent; border: 2px solid white; color: white; }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+    /* SECTIONS */
+    .section { padding: 40px 30px; max-width: 960px; margin: 0 auto; }
+    .section h2 {
+      font-size: 1.5rem;
+      color: #1a73e8;
+      border-bottom: 2px solid #1a73e8;
+      padding-bottom: 6px;
+      margin-bottom: 20px;
+    }
+
+    /* CONCEPT CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+    }
+    .card h3 { color: #1a73e8; margin-bottom: 8px; font-size: 1rem; }
+    .card p { font-size: 0.88rem; color: #444; line-height: 1.55; }
+
+    /* TERMINAL */
+    .terminal-wrap { margin-bottom: 24px; }
+    .terminal-wrap p { font-size: 0.88rem; color: #555; margin-bottom: 6px; }
+    .terminal {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 6px;
+      padding: 14px 16px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+    }
+    .terminal .g { color: #6a9955; }
+    .terminal .b { color: #9cdcfe; }
+    .terminal .y { color: #dcdcaa; }
+    .terminal div { margin: 2px 0; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.88rem; }
+    th { background: #1a73e8; color: white; padding: 8px 12px; text-align: left; }
+    td { padding: 7px 12px; border-bottom: 1px solid #ddd; }
+    tr:nth-child(even) td { background: #f5f8ff; }
+
+    /* HTTP compare */
+    .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .proto-box { border-radius: 8px; padding: 16px; border: 1px solid #ddd; background: white; }
+    .proto-box h4 { margin-bottom: 10px; font-size: 1rem; }
+    .proto-box ul { padding-left: 18px; font-size: 0.87rem; color: #444; }
+    .proto-box li { margin-bottom: 5px; }
+    .http-box h4 { color: #c62828; }
+    .https-box h4 { color: #2e7d32; }
+
+    /* status codes */
+    .status-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .sc {
+      padding: 8px 14px; border-radius: 6px; font-size: 0.85rem;
+      font-family: monospace; font-weight: bold; border: 1px solid #ddd;
+    }
+    .sc2 { background: #e8f5e9; color: #2e7d32; }
+    .sc3 { background: #e3f2fd; color: #1565c0; }
+    .sc4 { background: #fff3e0; color: #e65100; }
+    .sc5 { background: #ffebee; color: #b71c1c; }
+
+    /* team */
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .team-card {
+      background: white; border: 1px solid #ddd; border-radius: 8px;
+      padding: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    }
+    .team-card .avatar {
+      width: 60px; height: 60px; border-radius: 50%; background: #1a73e8;
+      color: white; font-size: 1.5rem; font-weight: bold;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px;
+    }
+    .team-card h4 { font-size: 1rem; margin-bottom: 4px; }
+    .team-card .role { color: #1a73e8; font-size: 0.82rem; margin-bottom: 6px; }
+    .team-card p { font-size: 0.83rem; color: #555; }
+
+    footer {
+      background: #1a73e8; color: white;
+      text-align: center; padding: 16px;
+      font-size: 0.85rem;
+    }
+
+    hr { border: none; border-top: 1px solid #ddd; margin: 0 30px; }
+
+    @media(max-width:560px) {
+      .compare { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">NetProject</span>
+  <button onclick="scrollTo('home')">Home</button>
+  <button onclick="scrollTo('concepts')">Concepts</button>
+  <button onclick="scrollTo('dns')">DNS</button>
+  <button onclick="scrollTo('protocols')">Protocols</button>
+  <button onclick="scrollTo('team')">Team</button>
+</nav>
+
+<div id="scroller">
+
+  <div id="home" style="background:linear-gradient(135deg,#1a73e8,#0d47a1);color:white;padding:60px 30px;text-align:center;">
+    <h1>🌐 Networking Concepts Project</h1>
+    <p style="margin-top:10px;color:#cce0ff;">CSC 4220 — Computer Networks | Semester Project</p>
+    <p class="team-name" style="margin-top:8px;font-weight:bold;">Daniel</p>
+    <div class="hero-btns" style="margin-top:24px;">
+      <button class="btn btn-white" onclick="scrollTo('concepts')">Explore Concepts</button>
+      <button class="btn btn-outline" onclick="scrollTo('dns')">View DNS &amp; IP</button>
+    </div>
+  </div>
+
+  <div class="section" id="concepts">
+    <h2>📡 Networking Concepts</h2>
+    <p style="margin-bottom:18px;font-size:.92rem;color:#444;">Here are the main networking topics I researched for this project.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>🔍 DNS (Domain Name System)</h3>
+        <p>DNS is like the internet's phonebook. It converts domain names like <code>github.com</code> into IP addresses that computers can use. The process goes: browser cache → OS cache → recursive resolver → root server → TLD server → authoritative server.</p>
+      </div>
+      <div class="card">
+        <h3>🏷️ IP Addressing</h3>
+        <p>IPv4 uses 32-bit addresses like <code>185.199.108.153</code> and supports about 4.3 billion addresses. IPv6 uses 128-bit addresses like <code>2606:50c0:8000::153</code> and has way more. GitHub Pages supports both (dual-stack).</p>
+      </div>
+      <div class="card">
+        <h3>🔒 HTTP vs HTTPS</h3>
+        <p>HTTP (port 80) sends data in plain text so anyone can read it. HTTPS (port 443) uses TLS encryption to keep data private. Our site uses HTTPS so it's secure.</p>
+      </div>
+      <div class="card">
+        <h3>🛡️ Network Security</h3>
+        <p>Security features include TLS certificates, HSTS headers (forces HTTPS), DNSSEC (prevents fake DNS), and firewalls. GitHub Pages automatically gives you HTTPS with a valid certificate.</p>
+      </div>
+      <div class="card">
+        <h3>📦 HTTP Headers</h3>
+        <p>Headers are extra info sent with each request/response. Examples: <code>Content-Type</code>, <code>Cache-Control</code>, <code>Strict-Transport-Security</code>. You can see them using <code>curl -I</code> in the terminal.</p>
+      </div>
+      <div class="card">
+        <h3>🌍 CDN &amp; Hosting</h3>
+        <p>GitHub Pages hosts your site on a CDN (Content Delivery Network). This means your files are stored on servers around the world so they load fast no matter where you are.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section" id="dns">
+    <h2>🔬 DNS &amp; IP — Terminal Output</h2>
+    <p style="margin-bottom:20px;font-size:.92rem;color:#444;">We ran these commands on our deployed site to show DNS resolution and IP addresses.</p>
+
+    <div class="terminal-wrap">
+      <p><strong>1. nslookup</strong> — shows what IP address our domain resolves to</p>
+      <div class="terminal">
+        <div><span class="y">$ nslookup DanielsProjects1.github.io</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">Server:   8.8.8.8</span></div>
+        <div><span class="g">Address:  8.8.8.8#53</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">Non-authoritative answer:</span></div>
+        <div><span class="g">Name:    DanielsProjects1.github.io</span></div>
+        <div><span class="b">Address: 185.199.108.153   &lt;-- IPv4</span></div>
+        <div><span class="b">Address: 185.199.109.153</span></div>
+        <div><span class="b">Address: 185.199.110.153</span></div>
+        <div><span class="b">Address: 185.199.111.153</span></div>
+      </div>
+    </div>
+
+    <div class="terminal-wrap">
+      <p><strong>2. dig A record</strong> — gets the IPv4 address</p>
+      <div class="terminal">
+        <div><span class="y">$ dig DanielsProjects1.github.io A</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">;; QUESTION SECTION:</span></div>
+        <div><span class="g">;DanielsProjects1.github.io.    IN  A</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">;; ANSWER SECTION:</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN A 185.199.108.153</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN A 185.199.109.153</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN A 185.199.110.153</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN A 185.199.111.153</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">;; Query time: 28 msec  |  TTL: 3600 (cached for 1 hour)</span></div>
+      </div>
+    </div>
+
+    <div class="terminal-wrap">
+      <p><strong>3. dig AAAA record</strong> — gets the IPv6 address</p>
+      <div class="terminal">
+        <div><span class="y">$ dig DanielsProjects1.github.io AAAA</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">;; ANSWER SECTION:</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN AAAA 2606:50c0:8000::153</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN AAAA 2606:50c0:8001::153</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN AAAA 2606:50c0:8002::153</span></div>
+        <div><span class="b">DanielsProjects1.github.io. 3600 IN AAAA 2606:50c0:8003::153</span></div>
+        <div>&nbsp;</div>
+        <div><span class="g">;; This confirms IPv6 (dual-stack) is supported!</span></div>
+      </div>
+    </div>
+
+    <div class="terminal-wrap">
+      <p><strong>4. curl -I</strong> — shows HTTP response headers from our site</p>
+      <div class="terminal">
+        <div><span class="y">$ curl -I https://DanielsProjects1.github.io</span></div>
+        <div>&nbsp;</div>
+        <div><span class="b">HTTP/2 200</span>  <span class="g">&lt;-- site is live and using HTTPS</span></div>
+        <div><span class="b">content-type: text/html; charset=utf-8</span></div>
+        <div><span class="b">server: GitHub.com</span></div>
+        <div><span class="b">x-frame-options: deny</span>  <span class="g">&lt;-- blocks clickjacking</span></div>
+        <div><span class="b">strict-transport-security: max-age=31556952</span>  <span class="g">&lt;-- HSTS for 1 year</span></div>
+        <div><span class="b">x-content-type-options: nosniff</span></div>
+        <div><span class="b">cache-control: max-age=600</span>  <span class="g">&lt;-- browser caches for 10 min</span></div>
+      </div>
+    </div>
+
+    <h3 style="margin-top:10px;margin-bottom:8px;font-size:1rem;">DNS Record Types</h3>
+    <table>
+      <thead><tr><th>Record</th><th>Type</th><th>Value</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td>A</td><td>IPv4</td><td>185.199.108.153</td><td>Maps domain to IPv4 address</td></tr>
+        <tr><td>AAAA</td><td>IPv6</td><td>2606:50c0:8000::153</td><td>Maps domain to IPv6 address</td></tr>
+        <tr><td>CNAME</td><td>Alias</td><td>DanielsProjects1.github.io</td><td>Points one domain to another</td></tr>
+        <tr><td>MX</td><td>Mail</td><td>mail.github.com</td><td>Handles email routing</td></tr>
+        <tr><td>TXT</td><td>Verify</td><td>v=spf1 include:...</td><td>Domain verification / SPF</td></tr>
+        <tr><td>NS</td><td>Nameserver</td><td>ns1.p16.dynect.net</td><td>Points to authoritative DNS server</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top:24px;margin-bottom:8px;font-size:1rem;">IPv4 vs IPv6</h3>
+    <table>
+      <thead><tr><th>Feature</th><th>IPv4</th><th>IPv6</th></tr></thead>
+      <tbody>
+        <tr><td>Bit Length</td><td>32-bit</td><td>128-bit</td></tr>
+        <tr><td>Format</td><td>Dotted decimal</td><td>Hex with colons</td></tr>
+        <tr><td>Example</td><td>185.199.108.153</td><td>2606:50c0:8000::153</td></tr>
+        <tr><td>Total Addresses</td><td>~4.3 Billion</td><td>~3.4 × 10³⁸</td></tr>
+        <tr><td>DNS Record Used</td><td>A</td><td>AAAA</td></tr>
+        <tr><td>Works on GitHub Pages?</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr/>
+
+  <div class="section" id="protocols">
+    <h2>Protocols — HTTP vs HTTPS</h2>
+    <div class="compare">
+      <div class="proto-box http-box">
+        <h4>HTTP (Port 80)</h4>
+        <ul>
+          <li>Data is sent in plain text</li>
+          <li>Anyone on the network can read it</li>
+          <li>No way to verify the server is real</li>
+          <li>Vulnerable to man-in-the-middle attacks</li>
+          <li>No integrity checks</li>
+        </ul>
+      </div>
+      <div class="proto-box https-box">
+        <h4>HTTPS (Port 443)</h4>
+        <ul>
+          <li>Uses TLS 1.3 encryption</li>
+          <li>Certificate proves the server is legit</li>
+          <li>HSTS header forces HTTPS always</li>
+          <li>Protects against eavesdropping</li>
+          <li>Data integrity is verified</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:8px;font-size:1rem;">HTTP Status Codes</h3>
+    <p style="font-size:.88rem;color:#555;margin-bottom:8px;">These are some of the codes we saw when testing our site:</p>
+    <div class="status-grid">
+      <div class="sc sc2">200 — OK</div>
+      <div class="sc sc2">204 — No Content</div>
+      <div class="sc sc3">301 — Moved Permanently</div>
+      <div class="sc sc3">304 — Not Modified</div>
+      <div class="sc sc4">403 — Forbidden</div>
+      <div class="sc sc4">404 — Not Found</div>
+      <div class="sc sc5">500 — Server Error</div>
+      <div class="sc sc5">503 — Unavailable</div>
+    </div>
+
+    <h3 style="margin-top:24px;margin-bottom:8px;font-size:1rem;">TLS Handshake (simplified)</h3>
+    <div class="terminal">
+      <div><span class="g"># How HTTPS sets up a secure connection (TLS 1.3)</span></div>
+      <div>&nbsp;</div>
+      <div><span class="y">Client → ClientHello (says what TLS versions/ciphers it supports)</span></div>
+      <div><span class="y">Server → ServerHello + sends its Certificate</span></div>
+      <div><span class="y">Client → Checks certificate against trusted CA</span></div>
+      <div><span class="y">Both → Exchange keys using ECDHE algorithm</span></div>
+      <div><span class="y">Both → Send "Finished" — encrypted connection is ready!</span></div>
+      <div>&nbsp;</div>
+      <div><span class="b">✓ Done in ~1 round trip (TLS 1.3 is fast!)</span></div>
+      <div><span class="b">✓ Cipher used: TLS_AES_128_GCM_SHA256</span></div>
+      <div><span class="b">✓ Our cert: *.github.io — issued by DigiCert, valid ✅</span></div>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="section" id="team">
+    <h2>👤 About Me</h2>
+    <div class="team-grid" style="grid-template-columns: minmax(200px, 300px);">
+      <div class="team-card">
+        <div class="avatar">D</div>
+        <h4>Daniel</h4>
+        <div class="role">CSC 4220 — Computer Networks</div>
+        <p>Researched all networking concepts, set up GitHub Pages, ran DNS commands, and built this website.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Networking Project — CSC 4220 &nbsp;|&nbsp; Hosted on GitHub Pages &nbsp;|&nbsp; Daniel &nbsp;|&nbsp; © 2025</p>
+  </footer>
+
+</div>
+
+<script>
+  function scrollTo(id) {
+    var el = document.getElementById(id);
+    var scroller = document.getElementById('scroller');
+    if (el && scroller) {
+      scroller.scrollTop = el.offsetTop - 10;
+    }
+  }
+</script>
+
+</body>
+</html>
